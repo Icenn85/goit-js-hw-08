@@ -29,7 +29,7 @@ function onTextareaInput (evt) {
 
 savedTextarea();
 function savedTextarea() {
-    const savedMessage = localStorage.getItem(FEEDBACK_KEY);
+    let savedMessage = localStorage.getItem(FEEDBACK_KEY);
 
     if (savedMessage) {
       savedMessage = JSON.parse(savedMessage);
