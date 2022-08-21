@@ -7,8 +7,6 @@ const FEEDBACK_KEY = 'feedback-form-state';
 form.addEventListener('submit', onFormSubmit);
 form.addEventListener('input', throttle(onTextareaInput, 500));
 
-let formData = {};
-
 function onFormSubmit(evt) {
     evt.preventDefault();
 
@@ -22,9 +20,15 @@ function onFormSubmit(evt) {
 }
 
 
-function onTextareaInput (evt) {
-    formData[evt.target.name] = evt.target.value;
-    localStorage.setItem(FEEDBACK_KEY, JSON.stringify(formData)); 
+function onTextareaInput(evt) {
+  let savedMessage = localStorage.getItem(FEEDBACK_KEY);
+  if (savedMessage) {
+    savedMessage = JSON.parse(savedMessage);
+  } else {
+    savedMessage = {};
+  }
+    savedMessage[evt.target.name] = evt.target.value;
+    localStorage.setItem(FEEDBACK_KEY, JSON.stringify(savedMessage)); 
 }
 
 savedTextarea();
